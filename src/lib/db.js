@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const connectDB = async () => {
+dotenv.config();
+
+export const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("MongoDB Connected");
+    await mongoose.connect(process.env.MONGO_URI); // uses bikeverse now
+    console.log("MongoDB connected!");
   } catch (error) {
-    console.error("Database connection error:", error);
+    console.error("MongoDB connection error:", error);
+    process.exit(1); // exit on failure
   }
 };
-
-export default connectDB;

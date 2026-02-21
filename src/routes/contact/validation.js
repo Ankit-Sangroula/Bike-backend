@@ -1,7 +1,7 @@
-import Joi from "joi";
-
-export const contactSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().email().required(),
-  message: Joi.string().required(),
-});
+export const contactValidation = (req, res, next) => {
+  const { name, email, message } = req.body;
+  if (!name || !email || !message) {
+    return res.status(400).json({ message: "Name, email, and message are required" });
+  }
+  next();
+};
